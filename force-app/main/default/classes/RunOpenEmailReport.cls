@@ -14,7 +14,7 @@ public without sharing class RunOpenEmailReport implements Schedulable {
             emails.add((String)item.getValue());
         }
 
-        List<Lead> leads = [SELECT Id, Email FROM Lead WHERE Email IN :emails AND FirstContactEmailOpened__c = false AND IsConverted = false];
+        List<Lead> leads = [SELECT Id, Email FROM Lead WHERE Email IN :emails AND FirstContactEmailOpened__c = false AND IsConverted = false AND Status IN ('New', 'Working') AND Email != NULL];
         for(Lead l : leads) {
             l.FirstContactEmailOpened__c = true;
         }
