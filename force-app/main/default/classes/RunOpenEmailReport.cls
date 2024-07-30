@@ -1,6 +1,6 @@
 public without sharing class RunOpenEmailReport implements Schedulable {
         
-    public void execute(SchedulableContext sc) {
+    public static void execute(SchedulableContext sc) {
         List <Report> reportList = [SELECT Id,DeveloperName FROM Report WHERE DeveloperName = 'All_Email_Openings_Report_WiM'];
         String reportId = (String)reportList.get(0).get('Id');
 
