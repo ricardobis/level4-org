@@ -15,7 +15,7 @@ public without sharing class RunOpenEmailReport implements Schedulable {
             emails.put(groupingVal.getlabel(), sumVal.getLabel());
         }
 
-        List<Lead> leads = [SELECT Id, Email FROM Lead WHERE Email IN :emails.keySet() AND FirstContactEmailOpened__c = false AND IsConverted = false AND Status IN ('New', 'Working') AND Email != NULL];
+        List<Lead> leads = [SELECT Id, Email FROM Lead WHERE Email IN :emails.keySet() AND IsConverted = false AND Status IN ('New', 'Working') AND Email != NULL];
         for(Lead l : leads) {
             l.FirstContactEmailOpened__c = true;
             l.FirstContactEmailOpenedAmount__c = Integer.valueOf(emails.get(l.Email));
